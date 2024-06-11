@@ -6,8 +6,8 @@ const cors =require("cors")
 // a middleware that allows server to accept requests from diffrent origins
 
 const app = express();
-const port = process.env.PORT || 5000;
-app.listen(PORT, () => console.log("server running on port ${PORT}"));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log("server running on port " + PORT));
 
 //app we create an instanse of an express application
 // the server will listen for incoming requests
@@ -28,7 +28,7 @@ mongoose.connect("mongodb://localhost:27017/Seltsilehe_tekst/tekst",{
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"))
-db.once(open, () =>{
+db.once('open', () =>{
     console.log("Connected to MongoDb")
 })
 
@@ -45,7 +45,7 @@ const Text = mongoose.model("Text", textSchema);
 //Tet a mongoose model based on textschema representing the "texts" collection in the database
 
 //DEFINING ROUTES
-const Item = require("./models/Item") // create the Item model
+const Item = require("./models/Item.js") // create the Item model
 app.get("/api/text", async (req, res) => {
     try{
         const texts = await Text.find();
@@ -58,6 +58,4 @@ app.get("/api/text", async (req, res) => {
 // app.get defines the GET endpoint at /api/text
 //async an asynchronous route handler that functions
 
-app.listen(port, () => {
-    console.loga("Server running on http://localhost:{port}")
-})
+
