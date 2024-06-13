@@ -1,6 +1,7 @@
 //express is web framework for Node.js that siplifies building web applications and API
 const express = require("express")
 const mongoose = require("mongoose")
+const Item = require("./models/Item.js") // create the Item model
 // mongoose an ODM library for MongoDB and Node.js
 const cors =require("cors")
 // a middleware that allows server to accept requests from diffrent origins
@@ -19,9 +20,10 @@ app.use(express.json())
 // middleware that parses incoming JSON requests and puts the parsed data in req.body
 
 //connectiong to MONGODB
-mongoose.connect("mongodb://localhost:27017/Seltsilehe_tekst/tekst",{
+mongoose.connect("mongodb://localhost:27017/Seltsilehe_tekst",{
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    
 });
 // mongoose. connection connects to the database using the connection strings and the options use are there to handle warnings
 
@@ -36,20 +38,25 @@ db.once('open', () =>{
 
 
 // defining a schema and model
-const textSchema = new mongoose.Schema({
+/* const textSchema = new mongoose.Schema({
     content: String,
-});
-const Text = mongoose.model("Text", textSchema);
+}); */
+
+const Text = require("./models/Text.js")
+
 
 //textschema defines the structure of the dcuments in the texts collection each document has a content field of string type
 //Tet a mongoose model based on textschema representing the "texts" collection in the database
 
 //DEFINING ROUTES
-const Item = require("./models/Item.js") // create the Item model
 app.get("/api/text", async (req, res) => {
     try{
-        const texts = await Text.find();
+
+        const texts = await Text.find().exec();
+        console.log("texts = " + texts);
+        
         res.json(texts);
+        
     }catch(error){
         console.error(error);
         res.status(500).send("Server Error");
@@ -59,3 +66,4 @@ app.get("/api/text", async (req, res) => {
 //async an asynchronous route handler that functions
 
 
+module.export = mongoose.model("tekst", Text)

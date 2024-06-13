@@ -9,15 +9,23 @@ console.log(Logo);
 console.log(Background);
 
 function App() {
+  const [Items, setitems] = useState([]);
+  const [displayItems, setDisplayItems] = useState(false)
+
   const handleClick = () => {
-    alert("Button Clicked");
+    setDisplayItems(!displayItems)
   };
 
     const [items, setItems] = useState([]);
 
     useEffect(() => {
       axios.get("/api/items")
-      .then(response => setItems(response.data))
+      .then(response => {
+        console.log("Fetchinnd data:", response.data)
+        setItems(response.data)
+        
+      })
+      
       .catch(error => console.error(error));
     }, []);
  
@@ -27,6 +35,12 @@ function App() {
         <img src={Logo} className="App-logo" alt="Logo peaks siin olema" />
 
         <Button onClick={handleClick}>click me</Button>
+        {displayItems && (
+          <div>{items.map(item =>(
+              <div key={item._id}>{item.content}</div>
+          ))}
+          </div>
+        )}
       </header>
     </div>
   );
