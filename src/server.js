@@ -1,6 +1,8 @@
 //express is web framework for Node.js that siplifies building web applications and API
 const express = require("express")
 const mongoose = require("mongoose")
+const {Schema} = mongoose;
+require('dotenv').config();
 const Item = require("./models/Item.js") // create the Item model
 // mongoose an ODM library for MongoDB and Node.js
 const cors =require("cors")
@@ -42,17 +44,24 @@ db.once('open', () =>{
     content: String,
 }); */
 
-const Text = require("./models/Text.js")
+const textSchema = new mongoose.Schema({
+    
+    name: String,
+    description: String,
+
+})
+const Text = mongoose.model('Teksts', textSchema);
+Text.createIndexes();
 
 
 //textschema defines the structure of the dcuments in the texts collection each document has a content field of string type
 //Tet a mongoose model based on textschema representing the "texts" collection in the database
 
 //DEFINING ROUTES
-app.get("/api/text", async (req, res) => {
+app.post("/api/text", async (req, res) => {
     try{
 
-        const texts = await Text.find().exec();
+        const texts = await Text.find();
         console.log("texts = " + texts);
         
         res.json(texts);
@@ -62,8 +71,10 @@ app.get("/api/text", async (req, res) => {
         res.status(500).send("Server Error");
     }
 });
+//https://www.dhiwise.com/post/from-frontend-to-database-mastering-react-and-mongodb 
+//should work
 // app.get defines the GET endpoint at /api/text
 //async an asynchronous route handler that functions
-
+app.listen(5000)
 
 module.export = mongoose.model("tekst", Text)

@@ -1,7 +1,9 @@
 const mongoose = require("mongoose")
+const {Schema} = mongoose;
 
-const textSchema = mongoose.Schema({
-    content: String,
+const textSchema = new Schema({
+    _id: String,
+    tekst: String,
 })
 
 const Text = mongoose.Schema("tekst", textSchema);
