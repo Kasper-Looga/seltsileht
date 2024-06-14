@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const dataSchema = new mongoose.Schema({
-    tekst: String
+    data: String
 });
 
-module.exports = mongoose.model("Data", dataSchema);
+module.exports = mongoose.model("data", dataSchema, "data");

@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const tekst = require("./models/Tekst.js");
+const Data = require("./models/Data.js");
 
 const app = express();
 const PORT = process.env.Port || 5000;
@@ -10,15 +10,17 @@ const PORT = process.env.Port || 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const uri = "mongodb://localhost:27017/Seltsilehe_tekst"
+const uri = "mongodb://localhost:27017/Data"
 mongoose.connect(uri,{useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => console.log("Mongodb connected"))
     .catch(err => console.log(err, "MongoDb not connected"))
 
-app.get("/tekst", async(req,res) => {
+
+app.get("/data", async(req,res) => {
     try{
-        const Tekst = await tekst.find()
-        res.json(Tekst)
+        const data = await Data.find()
+        console.log("Fetched Data", data)
+        res.json(data)
     } catch(err){
         res.status(500).json({message: err.message});
     }

@@ -18,7 +18,7 @@ function App() {
   };
   const fetchData = async () => {
     try{
-      const response = awaiy axios.get("http://localhost:5000/data")
+      const response = await axios.get("http://localhost:5000/Data");
       setData(response.data);
     }catch(error){
       console.error("Error Fetchind data", error);
