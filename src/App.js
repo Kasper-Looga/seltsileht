@@ -11,9 +11,18 @@ console.log(Background);
 function App() {
   const [Items, setitems] = useState([]);
   const [displayItems, setDisplayItems] = useState(false)
+  const [data, setData] = useState([])
 
   const handleClick = () => {
     setDisplayItems(!displayItems)
+  };
+  const fetchData = async () => {
+    try{
+      const response = awaiy axios.get("http://localhost:5000/data")
+      setData(response.data);
+    }catch(error){
+      console.error("Error Fetchind data", error);
+    }
   };
 
     const [items, setItems] = useState([]);
@@ -34,10 +43,10 @@ function App() {
       <header className="App-header">
         <img src={Logo} className="App-logo" alt="Logo peaks siin olema" />
 
-        <Button onClick={handleClick}>click me</Button>
+        <Button onClick={fetchData}>click me</Button>
         {displayItems && (
-          <div>{items.map(item =>(
-              <div key={item._id}>{item.content}</div>
+          <div>{data.map(item =>(
+              <div key={item._id}>{item.name}: {item.value}</div>
           ))}
           </div>
         )}
