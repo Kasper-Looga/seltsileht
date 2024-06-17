@@ -9,36 +9,53 @@ console.log(Logo);
 console.log(Background);
 
 function App() {
-  
-  const [displayItems, setDisplayItems] = useState(false)
   const [data, setData] = useState([])
+  const [displayItems, setDisplayItems] = useState(false)
+  
+  
 
   
   const fetchData = async () => {
     try{
+      console.log("fetching data...");
       const response = await axios.get("http://localhost:5000/Data");
+      console.log("fetched data",response.data);
       setData(response.data);
+      setDisplayItems(true);
+      console.log("display items",displayItems);
+      
+
     }catch(error){
       console.error("Error Fetchind data", error);
     }
   };
 
- 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={Logo} className="App-logo" alt="Logo peaks siin olema" />
+  useEffect(() => {
+    console.log("displayitmes:", displayItems);
+    console.log("data:", data);
+  },[displayItems,data]);
 
-        <Button onClick={fetchData}>click me</Button>
-        {displayItems && (
-          <div>{data.map(item =>(
-              <div key={item._id}>{item.name}: {item.value}</div>
-          ))}
-          </div>
-        )}
-      </header>
-    </div>
-  );
+ 
+  return ( 
+  <div className="App">
+     <header className="App-header">
+       <img src={Logo} className="App-logo" alt="Logo" /> 
+       <Button onClick={fetchData}>Click Me</Button> 
+       {displayItems && ( 
+        <div> 
+          {data.length > 0 ? ( 
+            data.map(item => (
+               <div key={item._id}> 
+                {item.data} 
+               </div> 
+             ))
+          ) : ( 
+          <p>No data to display</p> 
+        )} 
+      </div> )}
+   </header> 
+  </div> 
+  ); 
 }
 
 export default App;
