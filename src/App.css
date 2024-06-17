@@ -29,3 +29,11 @@
     
 }
 
+.App-Data{
+    position: absolute;
+    top: 28vw;
+    left: 30vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+

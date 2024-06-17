@@ -9,13 +9,11 @@ console.log(Logo);
 console.log(Background);
 
 function App() {
-  const [Items, setitems] = useState([]);
+  
   const [displayItems, setDisplayItems] = useState(false)
   const [data, setData] = useState([])
 
-  const handleClick = () => {
-    setDisplayItems(!displayItems)
-  };
+  
   const fetchData = async () => {
     try{
       const response = await axios.get("http://localhost:5000/Data");
@@ -25,18 +23,6 @@ function App() {
     }
   };
 
-    const [items, setItems] = useState([]);
-
-    useEffect(() => {
-      axios.get("/api/items")
-      .then(response => {
-        console.log("Fetchinnd data:", response.data)
-        setItems(response.data)
-        
-      })
-      
-      .catch(error => console.error(error));
-    }, []);
  
   return (
     <div className="App">
