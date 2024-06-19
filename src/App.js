@@ -10,18 +10,18 @@ console.log(Background);
 
 function App() {
   const [data, setData] = useState([])
-  const [displayItems, setDisplayItems] = useState(false)
+  const [displayItems, setDisplayItems] = useState("")
   
   
 
   
-  const fetchData = async () => {
+  const fetchData = async (field) => {
     try{
       console.log("fetching data...");
       const response = await axios.get("http://localhost:5000/Data");
       console.log("fetched data",response.data);
       setData(response.data);
-      setDisplayItems(true);
+      setDisplayItems(displayItems === field ? "" : field);
       console.log("display items",displayItems);
       
 
@@ -40,20 +40,25 @@ function App() {
   <div className="App">
      <header className="App-header">
        <img src={Logo} className="App-logo" alt="Logo" /> 
-       <Button onClick={fetchData}>Taltech seltsi info</Button> 
+       <div className="Button">
+       <Button onClick={() => fetchData("data")}>Taltech seltsi info</Button> 
+       <Button onClick={() => fetchData("info")}>Taltech Seltsi uudised  </Button>
+       </div>
+       
        {displayItems && ( 
         <div className="data-container"> 
           {data.length > 0 ? ( 
             data.map(item => (
                <div key={item._id} className="data-item"> 
-               <span className="data-id"></span><span className="data-text">{item.data ? item.data.replace(/^:/,'') : ""} </span>
+                <span className="data-id"></span><span className="data-text">{item.data ? item.data.replace(/^:/,'') : ""} </span>
                 
                </div> 
              ))
           ) : ( 
           <p className="no-data">No data to display</p> 
         )} 
-      </div> )}
+      </div> 
+    )}
    </header> 
   </div> 
   ); 
