@@ -40,17 +40,18 @@ function App() {
   <div className="App">
      <header className="App-header">
        <img src={Logo} className="App-logo" alt="Logo" /> 
-       <Button onClick={fetchData}>Click Me</Button> 
+       <Button onClick={fetchData}>Taltech seltsi info</Button> 
        {displayItems && ( 
-        <div> 
+        <div className="data-container"> 
           {data.length > 0 ? ( 
             data.map(item => (
-               <div key={item._id}> 
-                {item.data} 
+               <div key={item._id} className="data-item"> 
+               <span className="data-id"></span><span className="data-text">{item.data ? item.data.replace(/^:/,'') : ""} </span>
+                
                </div> 
              ))
           ) : ( 
-          <p>No data to display</p> 
+          <p className="no-data">No data to display</p> 
         )} 
       </div> )}
    </header> 

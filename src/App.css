@@ -21,8 +21,8 @@
     position: absolute;
     top:  6vw;
     left: 30vw;
-    width: 160px;
-    height: 160px;
+    width:  12vw;
+    height: 12vw;
     z-index: 10;
     background-repeat: no-repeat;
     background-size: cover;
@@ -37,3 +37,31 @@
     background-size: cover;
 }
 
+.no-data{
+    color: crimson;
+    font-style: italic;
+}
+
+.data-container {
+    position: absolute;
+    background-color: #222222b0;
+    margin: 10px 0;
+    padding:  10px;
+    border-radius: 5px;
+    color: #fff ;
+    text-align: left;
+    top: 20vw;
+    left: 4vw;
+    font-size: calc(0.85vw);
+}
+
+.data-id{
+    font-weight: bold;
+    color: #00f;
+}
+
+.data-text{
+    color: rgb(255, 255, 255);
+    top: 30vw;
+    left: 28vw;
+}
