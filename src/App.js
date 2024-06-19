@@ -15,14 +15,21 @@ function App() {
   
 
   
-  const fetchData = async (field) => {
+  const fetchData = async (input_button) => {
     try{
       console.log("fetching data...");
       const response = await axios.get("http://localhost:5000/Data");
       console.log("fetched data",response.data);
-      setData(response.data);
-      setDisplayItems(displayItems === field ? "" : field);
+      console.log("field", input_button )
+      if(input_button  === "data"){
+        setData(response.data["data"]);
+      }else if (input_button  ==="info"){
+        setData(response.data["info"]);
+      }
+      setDisplayItems(displayItems === input_button ? "" : input_button );
       console.log("display items",displayItems);
+      
+      
       
 
     }catch(error){
@@ -40,8 +47,11 @@ function App() {
   <div className="App">
      <header className="App-header">
        <img src={Logo} className="App-logo" alt="Logo" /> 
-       <div className="Button">
+       <div className="ButtonContainer top">
        <Button onClick={() => fetchData("data")}>Taltech seltsi info</Button> 
+       </div>
+
+       <div className="ButtonContainer bottom">
        <Button onClick={() => fetchData("info")}>Taltech Seltsi uudised  </Button>
        </div>
        
