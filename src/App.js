@@ -21,17 +21,20 @@ function App() {
       const response = await axios.get("http://localhost:5000/Data");
       console.log("fetched data",response.data);
       console.log("field", input_button )
+
       if(input_button  === "data"){
-        setData(response.data["data"]);
+        setData(response.data.filter(item => item.data));
+        console.log("this is (response.data[])", response.data["data"])
       }else if (input_button  ==="info"){
-        setData(response.data["info"]);
+        setData(response.data.filter(item => item.info));
+        console.log("this is (response.data[]) ", response.data["info"])
       }
+
+
+
       setDisplayItems(displayItems === input_button ? "" : input_button );
       console.log("display items",displayItems);
-      
-      
-      
-
+    
     }catch(error){
       console.error("Error Fetchind data", error);
     }
@@ -56,11 +59,15 @@ function App() {
        </div>
        
        {displayItems && ( 
-        <div className="data-container"> 
-          {data.length > 0 ? ( 
+        <div className="data-container">
+          
+          {data && data.length > 0 ? ( 
             data.map(item => (
                <div key={item._id} className="data-item"> 
-                <span className="data-id"></span><span className="data-text">{item.data ? item.data.replace(/^:/,'') : ""} </span>
+                <span className="item-id"></span>
+                <span className="data-text"> 
+                  {displayItems === "data" ? item.data : item.info}
+                </span>
                 
                </div> 
              ))
