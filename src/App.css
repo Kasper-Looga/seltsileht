@@ -42,6 +42,9 @@
 .bottom {
   top: 12vw;
 }
+.registerbutton {
+  top: 22vw;
+}
 .App-Data {
   position: absolute;
   top: 28vw;

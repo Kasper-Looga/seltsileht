@@ -52,6 +52,9 @@ function App() {
             Taltech Seltsi uudised{" "}
           </Button>
         </div>
+        <div className="ButtonContainer registerbutton">
+          <Button onClick={() => fetchData("info")}>Login </Button>
+        </div>
 
         {displayItems && (
           <div className="data-container">
