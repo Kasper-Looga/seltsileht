@@ -2,15 +2,18 @@ import "./App.css";
 import Button from "./components/Buttontest";
 import Background from "./Images/Background.png";
 import Logo from "./Images/Logo1.png";
+import LoginBackground from "./Images/LoginBackground.png";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 console.log(Logo);
 console.log(Background);
+console.log(LoginBackground);
 
 function App() {
   const [data, setData] = useState([]);
   const [displayItems, setDisplayItems] = useState("");
+  const [showForm, setShowForm] = useState(false);
 
   const fetchData = async (input_button) => {
     try {
@@ -30,14 +33,27 @@ function App() {
       setDisplayItems(displayItems === input_button ? "" : input_button);
       console.log("display items", displayItems);
     } catch (error) {
-      console.error("Error Fetchind data", error);
+      console.error("Error Fetching data", error);
     }
   };
 
   useEffect(() => {
-    console.log("displayitmes:", displayItems);
+    console.log("displayItems:", displayItems);
     console.log("data:", data);
   }, [displayItems, data]);
+
+  const handleClickOutside = (event) => {
+    if (event.target === document.getElementById("id_01")) {
+      setShowForm(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("click", handleClickOutside);
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="App">
@@ -49,82 +65,79 @@ function App() {
 
         <div className="ButtonContainer bottom">
           <Button onClick={() => fetchData("info")}>
-            Taltech Seltsi uudised{" "}
+            Taltech Seltsi uudised
           </Button>
         </div>
         <div className="ButtonContainer registerbutton">
-          <Button
-            onClick={(document.getElementById("id_01").style.display = "block")}
-          >
-            Login{" "}
-          </Button>
-          <div id="id_01">
-            <form>
-              <div>
-                <h1> Sign up</h1>
-                <p>Fill out this form now</p>
-                <label for="email">
-                  <b>Email</b>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter Password"
-                  name="psw"
-                  required
-                ></input>
-
-                <label for="psw">
-                  <b>Password</b>
-                </label>
-                <input
-                  type="password"
-                  placeholder="Enter Password"
-                  name="psw"
-                  required
-                ></input>
-
-                <label for="psw-repeat">
-                  <b>Repeat Password</b>
-                </label>
-                <input
-                  type="password"
-                  placeholder="Repeat Password"
-                  name="psw-repeat"
-                  required
-                ></input>
-
-                <label>
-                  <input
-                    type="checkbox"
-                    checked="checked"
-                    name="remember"
-                    style="margin-bottom:15px"
-                  >
-                    {" "}
-                    Remember me
-                  </input>
-                </label>
-
-                <p>
-                  By creating an account you agree to our{" "}
-                  <a href="#" style="color:dodgerblue">
-                    Terms & Privacy
-                  </a>
-                  .
-                </p>
-
-                <div class="clearfix">
-                  <button type="button" class="cancelbtn">
-                    Cancel
-                  </button>
-                  <button type="submit" class="signupbtn">
-                    Sign Up
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
+          <Button onClick={() => setShowForm(true)}>Login</Button>
         </div>
+
+        {showForm && (
+          <div id="id_01">
+            <div className="form-container">
+              <form>
+                <div>
+                  <h1>Sign up</h1>
+                  <p>Fill out this form now</p>
+                  <label htmlFor="email">
+                    <b>Email</b>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter Email"
+                    name="email"
+                    required
+                  />
+
+                  <label htmlFor="psw">
+                    <b>Password</b>
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="Enter Password"
+                    name="psw"
+                    required
+                  />
+
+                  <label htmlFor="psw-repeat">
+                    <b>Repeat Password</b>
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="Repeat Password"
+                    name="psw-repeat"
+                    required
+                  />
+
+                  <label>
+                    <input type="checkbox" name="remember" /> Remember me
+                  </label>
+
+                  <p>
+                    By creating an account you agree to our{" "}
+                    <a href="#" style={{ color: "dodgerblue" }}>
+                      Terms & Privacy
+                    </a>
+                    .
+                  </p>
+
+                  <div className="clearfix">
+                    <button
+                      type="button"
+                      className="cancelbtn"
+                      onClick={() => setShowForm(false)}
+                    >
+                      Cancel
+                    </button>
+                    <button type="submit" className="signupbtn">
+                      Sign Up
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
 
         {displayItems && (
           <div className="data-container">
