@@ -76,9 +76,9 @@ function App() {
           <div id="id_01">
             <div className="form-container">
               <form>
-                <div>
+                <div classname="column">
                   <h1>Sign up</h1>
-                  <p>Fill out this form now</p>
+                  <p>Fill out this form NOW</p>
                   <label htmlFor="email">
                     <b>Email</b>
                   </label>

@@ -82,7 +82,20 @@
   left: 30vw;
 }
 #id_01 {
-  padding: 15%;
+  padding: 2%;
   background-image: url("./Images/LoginBackground.png");
   z-index: 10;
+}
+
+.form-container {
+  width: 240px;
+  margin: 40px auto;
+  position: relative;
+  box-shadow: 0 0 20px 9px #ff61241f;
+  border-radius: 35px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
 }
