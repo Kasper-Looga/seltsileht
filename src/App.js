@@ -76,6 +76,16 @@ function App() {
           <div id="id_01">
             <div className="form-container">
               <form>
+                <div className="button-box">
+                  <div id="btncooler">
+                    <button type="button" className="toggle-btn">
+                      Log in
+                    </button>
+                    <button type="button" className="toggle-btn">
+                      Sign up
+                    </button>
+                  </div>
+                </div>
                 <div className="column">
                   <h1>Sign up</h1>
                   <p>Fill out this form NOW</p>
