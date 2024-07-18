@@ -74,77 +74,15 @@ function App() {
 
         {showForm && (
           <div id="id_01">
-            <div className="form-container">
-              <form>
-                <div className="button-box">
-                  <div id="btncooler">
-                    <button type="button" className="toggle-btn">
-                      Log in
-                    </button>
-                    <button type="button" className="toggle-btn">
-                      Sign up
-                    </button>
-                  </div>
-                </div>
-                <div className="column">
-                  <h1>Sign up</h1>
-                  <p>Fill out this form NOW</p>
-                  <label htmlFor="email">
-                    <b>Email</b>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Enter Email"
-                    name="email"
-                    required
-                  />
-
-                  <label htmlFor="psw">
-                    <b>Password</b>
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Enter Password"
-                    name="psw"
-                    required
-                  />
-
-                  <label htmlFor="psw-repeat">
-                    <b>Repeat Password</b>
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Repeat Password"
-                    name="psw-repeat"
-                    required
-                  />
-
-                  <label>
-                    <input type="checkbox" name="remember" /> Remember me
-                  </label>
-
-                  <p>
-                    By creating an account you agree to our{" "}
-                    <a href="#" style={{ color: "dodgerblue" }}>
-                      Terms & Privacy
-                    </a>
-                    .
-                  </p>
-
-                  <div className="clearfix">
-                    <button
-                      type="button"
-                      className="cancelbtn"
-                      onClick={() => setShowForm(false)}
-                    >
-                      Cancel
-                    </button>
-                    <button type="submit" className="signupbtn">
-                      Sign Up
-                    </button>
-                  </div>
-                </div>
-              </form>
+            <div className="button-box">
+              <div id="btncooler">
+                <button type="button" className="toggle-btn">
+                  Log in
+                </button>
+                <button type="button" className="toggle-btn">
+                  Register
+                </button>
+              </div>
             </div>
           </div>
         )}
