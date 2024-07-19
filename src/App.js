@@ -75,16 +75,16 @@ function App() {
         {showForm && (
           <div id="id_01">
             <div className="button-box">
-              <div id="btncooler">
-                <button type="button" className="toggle-btn">
-                  Log in
-                </button>
-                <button type="button" className="toggle-btn">
-                  Register
-                </button>
-              </div>
+              <div id="btncooler"></div>
+              <button type="button" className="toggle-btn">
+                Log in
+              </button>
+              <button type="button" className="toggle-btn" onclick="register()">
+                Register
+              </button>
+
               <div>
-                <form className="input-group">
+                <form id="login" className="input-group">
                   <input
                     type="text"
                     className="input-field"
@@ -101,6 +101,32 @@ function App() {
                   <span>Remember Password</span>
                   <button type="submit" className="submit-btn">
                     Log in
+                  </button>
+                </form>
+                <form id="register" className="input-group">
+                  <input
+                    type="text"
+                    className="input-field"
+                    placeholder="User id"
+                    required
+                  ></input>
+
+                  <input
+                    type="text"
+                    className="input-field"
+                    placeholder="Email"
+                    required
+                  ></input>
+                  <input
+                    type="text"
+                    className="input-field"
+                    placeholder="Enter Password"
+                    required
+                  ></input>
+                  <input type="checkbox" className="checkbox"></input>
+                  <span>Remember Password</span>
+                  <button type="submit" className="submit-btn">
+                    Register
                   </button>
                 </form>
               </div>

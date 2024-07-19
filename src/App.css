@@ -168,3 +168,10 @@ span {
   font-size: 12px;
   bottom: 68px;
 }
+
+#login {
+  left: 50px;
+}
+#register {
+  left: 450px;
+}
