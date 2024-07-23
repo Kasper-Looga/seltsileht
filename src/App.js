@@ -1,10 +1,12 @@
 import "./App.css";
+
 import Button from "./components/Buttontest";
 import Background from "./Images/Background.png";
 import Logo from "./Images/Logo1.png";
 import LoginBackground from "./Images/LoginBackground.png";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import * as Components from "./components/Components";
 
 console.log(Logo);
 console.log(Background);
@@ -13,7 +15,15 @@ console.log(LoginBackground);
 function App() {
   const [data, setData] = useState([]);
   const [displayItems, setDisplayItems] = useState("");
-  const [showForm, setShowForm] = useState(false);
+  const [formType, setFormType] = useState("login");
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [signIn, toggle] = React.useState(true);
+  const toggleForm = () => setIsFormOpen(!isFormOpen);
+
+  const switchToLogin = () => {
+    setFormType("login");
+  };
+  const switchToRegister = () => setFormType("register");
 
   const fetchData = async (input_button) => {
     try {
@@ -42,19 +52,6 @@ function App() {
     console.log("data:", data);
   }, [displayItems, data]);
 
-  const handleClickOutside = (event) => {
-    if (event.target === document.getElementById("id_01")) {
-      setShowForm(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("click", handleClickOutside);
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
   return (
     <div className="App">
       <header className="App-header">
@@ -69,69 +66,55 @@ function App() {
           </Button>
         </div>
         <div className="ButtonContainer registerbutton">
-          <Button onClick={() => setShowForm(true)}>Login</Button>
+          <Button onClick={toggleForm}>Login</Button>
         </div>
 
-        {showForm && (
-          <div id="id_01">
-            <div className="button-box">
-              <div id="btncooler"></div>
-              <button type="button" className="toggle-btn">
-                Log in
-              </button>
-              <button type="button" className="toggle-btn" onclick="register()">
-                Register
-              </button>
-
-              <div>
-                <form id="login" className="input-group">
-                  <input
-                    type="text"
-                    className="input-field"
-                    placeholder="User id"
-                    required
-                  ></input>
-                  <input
-                    type="text"
-                    className="input-field"
-                    placeholder="Enter Password"
-                    required
-                  ></input>
-                  <input type="checkbox" className="checkbox"></input>
-                  <span>Remember Password</span>
-                  <button type="submit" className="submit-btn">
-                    Log in
-                  </button>
-                </form>
-                <form id="register" className="input-group">
-                  <input
-                    type="text"
-                    className="input-field"
-                    placeholder="User id"
-                    required
-                  ></input>
-
-                  <input
-                    type="text"
-                    className="input-field"
-                    placeholder="Email"
-                    required
-                  ></input>
-                  <input
-                    type="text"
-                    className="input-field"
-                    placeholder="Enter Password"
-                    required
-                  ></input>
-                  <input type="checkbox" className="checkbox"></input>
-                  <span>Remember Password</span>
-                  <button type="submit" className="submit-btn">
-                    Register
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
+        {isFormOpen && (
+          <Components.Container>
+            <Components.SignUpContainer signingIn={signIn}>
+              <Components.Form>
+                <Components.Title>Create Account</Components.Title>
+                <Components.Input type="text" placeholder="Name" />
+                <Components.Input type="email" placeholder="Email" />
+                <Components.Input type="password" placeholder="Password" />
+                <Components.Button>Sign Up</Components.Button>
+              </Components.Form>
+            </Components.SignUpContainer>
+            <Components.SignInContainer signingIn={signIn}>
+              <Components.Form>
+                <Components.Title>Sign in</Components.Title>
+                <Components.Input type="email" placeholder="Email" />
+                <Components.Input type="password" placeholder="Password" />
+                <Components.Anchor href="#">
+                  Forgot your password?
+                </Components.Anchor>
+                <Components.Button>Sign In</Components.Button>
+              </Components.Form>
+            </Components.SignInContainer>
+            <Components.OverlayContainer signingIn={signIn}>
+              <Components.Overlay signingIn={signIn}>
+                <Components.LeftOverlayPanel signingIn={signIn}>
+                  <Components.Title>Welcome Back!</Components.Title>
+                  <Components.Paragraph>
+                    To keep connected with us please login with your personal
+                    info
+                  </Components.Paragraph>
+                  <Components.GhostButton onClick={() => toggle(true)}>
+                    Sign In
+                  </Components.GhostButton>
+                </Components.LeftOverlayPanel>
+                <Components.RightOverlayPanel signingIn={signIn}>
+                  <Components.Title>Hello, Friend!</Components.Title>
+                  <Components.Paragraph>
+                    Enter your personal details and start journey with us
+                  </Components.Paragraph>
+                  <Components.GhostButton onClick={() => toggle(false)}>
+                    Sign Up
+                  </Components.GhostButton>
+                </Components.RightOverlayPanel>
+              </Components.Overlay>
+            </Components.OverlayContainer>
+          </Components.Container>
         )}
 
         {displayItems && (
@@ -154,5 +137,18 @@ function App() {
     </div>
   );
 }
+const LoginForm = () => (
+  <div>
+    <h2>Login Form</h2>
+    {/* Add your login form fields here */}
+  </div>
+);
+
+const RegisterForm = () => (
+  <div>
+    <h2>Register Form</h2>
+    {/* Add your register form fields here */}
+  </div>
+);
 
 export default App;

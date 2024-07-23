@@ -81,97 +81,42 @@
   top: 30vw;
   left: 30vw;
 }
-#id_01 {
-  width: 380px;
-  height: 480px;
-  margin: 6%auto;
 
-  position: relative;
-  background-image: url("./Images/LoginBackground.png");
-  background-position: center;
-  padding: 5px;
-  z-index: 10;
+.open-form-button {
+  margin: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
 }
 
 .form-container {
-  width: 260px;
-  margin: 45px auto;
-  position: relative;
-  box-shadow: 0 0 20px 9px #ff61241f;
-  border-radius: 35px;
-  margin: 6%auto;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-}
-
-.toggle-btn {
-  padding: 10px 30px;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-  outline: none;
-  position: relative;
-}
-
-.button-box {
-  align-items: center;
+  border: 1px solid #ccc;
+  padding: 20px;
   width: 300px;
-  margin: 35px auto;
-  position: relative;
-  margin: 6%;
-  box-shadow: 0 0 20px 9px #ff61241f;
-  border-radius: 30px;
-}
-#btncooler {
-  top: 0;
-  left: 0;
-  position: absolute;
-  background: linear-gradient(to right, #ff105f, #ffad06);
-  border-radius: 30px;
-  transition: 0.5s;
+  margin: 0 auto;
+  transition: all 0.3s ease;
 }
 
-.input-group {
-  top: 190px;
-  position: absolute;
-  width: 280px;
-  transition: 0.5s;
-}
-.input-field {
-  width: 100%;
-  padding: 10px 0;
-  margin: 5px 0;
-  border-bottom: 1px solid #999;
-  outline: none;
-  background: transparent;
+.form-header {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
 }
 
-.submit-btn {
-  width: 85%;
-  padding: 10px 30px;
-  cursor: pointer;
-  display: block;
-  margin: auto;
-  background: linear-gradient(to right, #ff105f, #ffad06);
+.form-toggle-button {
+  padding: 10px;
   border: none;
-  outline: none;
-  border-radius: 30px;
-}
-.checkbox {
-  margin: 30px 10px 30px 0;
-}
-span {
-  color: #777;
-  font-size: 12px;
-  bottom: 68px;
+  background: none;
+  cursor: pointer;
+  background-color: #007bff;
+  font-size: 16px;
+  transition: color 1.3s ease, background-color 1.3s ease;
 }
 
-#login {
-  left: 50px;
+.form-toggle-button.active {
+  color: white;
+  background-color: #007bff;
 }
-#register {
-  left: 450px;
+
+.form-content {
+  transition: all 2s ease;
 }
