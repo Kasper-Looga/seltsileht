@@ -1,18 +1,19 @@
 import styled from "styled-components";
+import img from "../Images/LoginBackground.png";
 
 export const Container = styled.div`
-  background-image: url("../Images/LoginBackground.png");
+  background-image: url(${img});
   border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
   width: 678px;
-  max-width: 100%;
-  min-height: 400px;
+  max-width: 120%;
+  min-height: 500px;
 `;
 
 export const SignUpContainer = styled.div`
-  background-image: url("../Images/LoginBackground.png");
+  background-image: url(${img});
   position: absolute;
   top: 0;
   height: 100%;
@@ -44,7 +45,6 @@ export const SignInContainer = styled.div`
 `;
 
 export const Form = styled.form`
-  background-image: url("../Images/LoginBackground.png");
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,6 +99,7 @@ export const Anchor = styled.a`
 `;
 
 export const OverlayContainer = styled.div`
+  background-image: url(${img});
   position: absolute;
   top: 0;
   left: 50%;
@@ -112,13 +113,22 @@ export const OverlayContainer = styled.div`
 `;
 
 export const Overlay = styled.div`
-  background: #ff416c;
-  background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  background-image: url(${img});
+
+  background: -webkit-linear-gradient(
+    to right,
+    rgba(255, 75, 23, 0.5),
+    rgba(255, 35, 128, 0.5)
+  );
+  background: linear-gradient(
+    to right,
+    rgba(255, 75, 23, 0.5),
+    rgba(255, 35, 128, 0.5)
+  );
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;
-  color: #ffffff;
+
   position: relative;
   left: -100%;
   height: 100%;
