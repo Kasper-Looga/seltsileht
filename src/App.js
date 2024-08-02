@@ -1,11 +1,10 @@
 import "./App.css";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Button from "./components/Buttontest";
 import Background from "./Images/Background.png";
 import Logo from "./Images/Logo1.png";
 import LoginBackground from "./Images/LoginBackground.png";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
 import * as Components from "./components/Components";
 
 console.log(Logo);
@@ -17,33 +16,51 @@ function App() {
   const [displayItems, setDisplayItems] = useState("");
   const [formType, setFormType] = useState("login");
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [signIn, toggle] = React.useState(true);
-  const toggleForm = () => setIsFormOpen(!isFormOpen);
+  const [signIn, toggle] = useState(true);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-  const switchToLogin = () => {
-    setFormType("login");
-  };
+  const toggleForm = () => setIsFormOpen(!isFormOpen);
+  const switchToLogin = () => setFormType("login");
   const switchToRegister = () => setFormType("register");
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (type) => {
+    const url = type === "register" ? "/register" : "/login";
+    try {
+      const response = await axios.post(
+        `http://localhost:5000${url}`,
+        formData
+      );
+      console.log(response.data);
+      if (type === "login") {
+        // handle login success (e.g., store token, redirect)
+      } else {
+        // handle registration success
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+    }
+  };
 
   const fetchData = async (input_button) => {
     try {
-      console.log("fetching data...");
-      const response = await axios.get("http://localhost:5000/Data");
-      console.log("fetched data", response.data);
-      console.log("field", input_button);
-
+      const response = await axios.get("http://localhost:5000/data");
       if (input_button === "data") {
         setData(response.data.filter((item) => item.data));
-        console.log("this is (response.data[])", response.data["data"]);
       } else if (input_button === "info") {
         setData(response.data.filter((item) => item.info));
-        console.log("this is (response.data[]) ", response.data["info"]);
       }
-
       setDisplayItems(displayItems === input_button ? "" : input_button);
-      console.log("display items", displayItems);
     } catch (error) {
-      console.error("Error Fetching data", error);
+      console.error("Error fetching data", error);
     }
   };
 
@@ -59,7 +76,6 @@ function App() {
         <div className="ButtonContainer top">
           <Button onClick={() => fetchData("data")}>Taltech seltsi info</Button>
         </div>
-
         <div className="ButtonContainer bottom">
           <Button onClick={() => fetchData("info")}>
             Taltech Seltsi uudised
@@ -74,21 +90,55 @@ function App() {
             <Components.SignUpContainer signingIn={signIn}>
               <Components.Form>
                 <Components.Title>Create Account</Components.Title>
-                <Components.Input type="text" placeholder="Name" />
-                <Components.Input type="email" placeholder="Email" />
-                <Components.Input type="password" placeholder="Password" />
-                <Components.Button>Sign Up</Components.Button>
+                <Components.Input
+                  type="text"
+                  placeholder="Name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                />
+                <Components.Input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+                <Components.Input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                />
+                <Components.Button onClick={() => handleSubmit("register")}>
+                  Sign Up
+                </Components.Button>
               </Components.Form>
             </Components.SignUpContainer>
             <Components.SignInContainer signingIn={signIn}>
               <Components.Form>
                 <Components.Title>Sign in</Components.Title>
-                <Components.Input type="email" placeholder="Email" />
-                <Components.Input type="password" placeholder="Password" />
+                <Components.Input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+                <Components.Input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                />
                 <Components.Anchor href="#">
                   Forgot your password?
                 </Components.Anchor>
-                <Components.Button>Sign In</Components.Button>
+                <Components.Button onClick={() => handleSubmit("login")}>
+                  Sign In
+                </Components.Button>
               </Components.Form>
             </Components.SignInContainer>
             <Components.OverlayContainer signingIn={signIn}>
@@ -137,18 +187,5 @@ function App() {
     </div>
   );
 }
-const LoginForm = () => (
-  <div>
-    <h2>Login Form</h2>
-    {/* Add your login form fields here */}
-  </div>
-);
-
-const RegisterForm = () => (
-  <div>
-    <h2>Register Form</h2>
-    {/* Add your register form fields here */}
-  </div>
-);
 
 export default App;

@@ -1,7 +1,23 @@
 const mongoose = require("mongoose");
 
-const dataSchema = new mongoose.Schema({
-  data: String,
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    lowercase: true,
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 6,
+  },
 });
 
-module.exports = mongoose.model("User", dataSchema, "User");
+module.exports = mongoose.model("User", userSchema); // Export schema for usage in different connections
